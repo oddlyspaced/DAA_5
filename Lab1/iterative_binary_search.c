@@ -4,11 +4,11 @@
 // #include <unistd.h>
 
 void main() {
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int arr[] = {4, 2, 1, 3, 9, 2, 6, 8, 0, 11};
     int size = 9;
     int low = 0;
     int high = size;
-    int value_to_find = 7;
+    int value_to_find = 9;
     int mid_index = size / 2;
     while (arr[mid_index] != value_to_find) {
         // printf("L: %d M: %d H: %d\n", low, mid_index, high);

@@ -14,11 +14,8 @@ void main() {
     print_arr(arr, size);
     int i, j;
     for (i = 0; i < size; i++) {
-        int v = arr[i];
         for (j = i + 1; j < size; j++) {
-            int vv = arr[j];
-            if (v > vv) {
-                // swap vv and v
+            if (arr[i] > arr[j]) {
                 int t = arr[i];
                 arr[i] = arr[j];
                 arr[j] = t;                                
