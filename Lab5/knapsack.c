@@ -1,27 +1,47 @@
 #include<stdio.h>
 
 int main() {
-    int n = 7;
-    int profits[] = {10, 5, 15, 7, 6, 18, 3};
-    int wts[] = {2, 3, 5, 7, 1, 4, 1};
-    float rats[n];
-    int size = 15;
     int i;
+    int n;
+    printf("\nEnter number of items: ");
+    scanf("%d", &n);
+
+    printf("\nEnter profits: ");
+    int profits[n];
+    for (i = 0; i < n; i++) {
+        scanf("%d", &profits[i]);
+    }
+
+    printf("\nEnter weights: ");
+    int wts[n];
+    for (i = 0; i < n; i++) {
+        scanf("%d", &wts[i]);
+    }
+
+    int size;
+    printf("\nEnter knapsack limit: ");
+    scanf("%d", &size);
+
+    // ratio array
+    float rats[n];
     for (i = 0; i < n; i++) {
         rats[i] = profits[i]/wts[i];
     }
 
-    float items[n];
+    // total calculated profit
     float prof = 0;
 
+    // item ratio
+    float items[n];
     for (i = 0; i < n; i++) {
         items[i] = 0;
     }
 
     while(size > 0) {
+        // finding max ratio index
         int max = 0;
         float rat = rats[max];
-        for (i = 0; i < n; i++) {
+        for (i = 1; i < n; i++) {
             float t_rat = rats[i];
             if (rat < t_rat) {
                 max = i;
@@ -48,7 +68,4 @@ int main() {
     }
 
     printf("\nFinal profit: %f", prof);
-
-    
-
 }
