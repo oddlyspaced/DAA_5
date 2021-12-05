@@ -1,3 +1,7 @@
+// Merge Sort
+// Hardik Srivastava
+// 199303069
+
 #include<stdio.h>
 
 void print_arr(int arr[], int size) {
@@ -47,7 +51,6 @@ void merge_arr(int arr[], int size, int l, int m, int r) {
     }
 
 }
-
 
 void merge_sort(int arr[], int size, int l, int r) {
     if (l < r) {
