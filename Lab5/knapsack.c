@@ -1,3 +1,7 @@
+// Greedy Fractional Knapsack 
+// Hardik Srivastava
+// 199303069
+
 #include<stdio.h>
 
 int main() {
