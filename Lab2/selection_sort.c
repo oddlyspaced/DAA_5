@@ -1,3 +1,7 @@
+// Selection Sort
+// Hardik Srivastava
+// 199303069
+
 #include<stdio.h>
 
 void print_arr(int arr[], int size) {
