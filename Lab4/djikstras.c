@@ -1,39 +1,79 @@
-#include<stdio.h>
+// Djikstra
+// Hardik Srivastava
+// 199303069
 
-#define MAX 100
+#include <stdio.h>
 
-int main() {
-    int size = 6;
-    // int arr[4][3]={{1,2,3},{2,3,4},{3,4,5},{4,5,6}};     
-    int adj[6][6] = {{0, 2, 4, 0, 0, 0}, {0, 0, 1, 7, 0, 0}, {0, 0, 0, 0, 3, 0}, {0, 0, 0, 0, 0, 1}, {0, 0, 0, 2, 0, 5}, {0, 0, 0, 0, 0, 0}};
-    int max = 6;
-    
-    // find smallest dist node
-    int current = 0;
-    while (current != max - 1) {
-        // find first smallest that is not 0
-        int smallest = -1;
-        int smallest_index = -1;
+#define INFINITY 9999
+#define MAX 10
 
-        int i;
-        for (i = 0; i < max; i++) {
-            int t = adj[current][i];
-            if (t > 0) {
-                if (smallest == -1) {
-                    smallest_index = i;
-                    smallest = t;
-                }
-                else if (smallest > t) {
-                    smallest_index = i;
-                    smallest = t;
-                }
+void djikstra(int Graph[MAX][MAX], int n, int start) {
+    int cost[MAX][MAX], distance[MAX], predecessor[MAX], visited[MAX], count, mindist, nextnode, i, j;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (Graph[i][j] == 0) {
+                cost[i][j] = INFINITY;
+            }
+            else {
+                cost[i][j] = Graph[i][j];
             }
         }
-        printf("sma %d\n", smallest_index + 1);
-        current = smallest_index;
     }
+    
+    for (i = 0; i < n; i++)  {
+        distance[i] = cost[start][i];
+        predecessor[i] = start;
+        visited[i] = 0;
+    }
+    
+    distance[start] = 0;
+    visited[start] = 1;
+    count = 1;
+    while (count < n - 1) {
+        mindist = INFINITY;
+        for (i = 0; i < n; i++) {
+			if (distance[i] < mindist && !visited[i]) {
+				mindist = distance[i];
+				nextnode = i;
+			}
+		}
+		visited[nextnode] = 1;
+    	for (i = 0; i < n; i++) {
+			if (!visited[i]) {
+        		if (mindist + cost[nextnode][i] < distance[i]) {
+					distance[i] = mindist + cost[nextnode][i];
+					predecessor[i] = nextnode;
+				}
+        	}
+        }
+    	count++;
+	}
+	for (i = 0; i < n; i++) {
+		if (i != start) {
+			printf("\nDistance from source to %d: %d\n", i, distance[i]);
+			printf("Path = %d", i);
+			j=i;
+			do {
+				j = predecessor[j];
+				printf(" <- %d", j);
+			} while(j != start);
+    	}
+    }
+}
 
-
-
-    return 0;
+int main() {
+	int Graph[MAX][MAX], i, j, n, u;
+	printf("Enter the number of vertices:\n");
+	scanf("%d",&n);
+	printf("Enter an adjacency matrix: \n");
+	for(i = 0; i < n; i++) {
+		for(j = 0; j < n; j++) {
+			scanf("%d",&Graph[i][j]);
+		}
+		printf("\n");
+	}
+	printf("Enter the starting vertex: \n");
+	scanf("%d",&u);
+	djikstra(Graph, n, u);
+	return 0;
 }
